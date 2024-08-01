@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calendario 2024</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+    .calendar {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      max-width: 400px;
+    }
+    .calendar-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .calendar-header h2 {
+      margin: 0;
+    }
+    .calendar-body {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+    }
+    .day {
+      text-align: center;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .day-header {
+      font-weight: bold;
+    }
+    .day-cell {
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .day-cell:hover {
+      background-color: #e0e0e0;
+    }
+  </style>
+</head>
+<body>
+  <div class="calendar">
+    <div class="calendar-header">
+      <h2 id="calendar-title">Enero 2024</h2>
+    </div>
+    <div class="calendar-body" id="calendar-body">
+      <div class="day day-header">Dom</div>
+      <div class="day day-header">Lun</div>
+      <div class="day day-header">Mar</div>
+      <div class="day day-header">Mié</div>
+      <div class="day day-header">Jue</div>
+      <div class="day day-header">Vie</div>
+      <div class="day day-header">Sáb</div>
+    </div>
+  </div>
+  <script>
+    const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+    const currentYear = 2024;
+    let currentMonth = 0;
+
+    const calendarTitle = document.getElementById('calendar-title');
+    const calendarBody = document.getElementById('calendar-body');
+
+    function renderCalendar(month) {
+      calendarBody.innerHTML = `
+        <div class="day day-header">Dom</div>
+        <div class="day day-header">Lun</div>
+        <div class="day day-header">Mar</div>
+        <div class="day day-header">Mié</div>
+        <div class="day day-header">Jue</div>
+        <div class="day day-header">Vie</div>
+        <div class="day day-header">Sáb</div>
+      `;
+
+      const firstDay = new Date(currentYear, month, 1).getDay();
+      const daysInMonth = new Date(currentYear, month + 1, 0).getDate();
+
+      for (let i = 0; i < firstDay; i++) {
+        calendarBody.innerHTML += `<div class="day day-cell"></div>`;
+      }
+
+      for (let i = 1; i <= daysInMonth; i++) {
+        calendarBody.innerHTML += `<div class="day day-cell">${i}</div>`;
+      }
+
+      calendarTitle.textContent = `${monthNames[month]} ${currentYear}`;
+    }
+
+    renderCalendar(currentMonth);
+  </script>
+</body>
+</html>
